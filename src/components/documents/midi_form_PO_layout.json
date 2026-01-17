@@ -1,0 +1,237 @@
+{
+  "version": "A-1.0.0",
+  "page": {
+    "size": "A4",
+    "margins_mm": [4, 10, 4, 20],
+    "dpi": 96,
+    "base_font_family": ["'TH Sarabun New'", "Tahoma", "Arial", "sans-serif"],
+    "base_font_px": 14,
+    "line_height": 1.15
+  },
+
+  "fonts": {
+    "pt_to_px_factor": 1.333,
+    "sizes_pt": {
+      "logo": 65,
+      "title": 22,
+      "company_th_bold": 16,
+      "company_en_bold": 14,
+      "label_main": 14,
+      "label_en": 11,
+      "table_value": 16,
+      "body": 14,
+      "fine_print_th": 12,
+      "fine_print_en": 10
+    }
+  },
+
+  "header_company": {
+    "logo_text": "MIDI",
+    "logo_px": 48,
+    "tagline_px": 20,
+    "tagline_text": "Engineering and Equipment", 
+    "company_block": {
+      "th_bold_px": 16,
+      "en_bold_px": 16,
+      "addr_th_px": 14,
+      "addr_en_px": 14,
+      "tel_px": 16
+    },
+    "texts": {
+      "name_th": "บริษัท มีดี้ เอ็นจิเนียริ่ง แอนด์ อิควิปเม้นท์ จำกัด (สำนักงานใหญ่)",
+      "addr_th": "27 ซ.รามอินทรา 28  ถ.รามอินทรา  ต.ท่าแร้ง  อ.บางเขน  จ.กรุงเทพฯ  10230",
+      "name_en": "MIDI Engineering and Equipment CO.,LTD.",      
+      "addr_en": "27 Soi Ramintra 28 Ramintra RD.  T.Tharang  A.Bangkhen  Bangkok  10230",
+      "tax_label": "เลขประจำตัวผู้เสียภาษีอากร",
+      "tax_id": "0105553054485",
+      "tel": ""
+    },
+    "layout": {
+      "right_min_width": 350,
+      "right_max_width": 520,
+      "right_padding_top_px": 6,
+      "gap_px": 16,
+      "top_offset_px": 0
+    }
+  },
+
+
+  "title_bar": {
+    "text_bind": "header_title",
+    "font_px": 24,                  
+    "padding_px": [2, 0]
+  },
+
+
+
+
+  "head_grid": {
+    "offset_top_px": -16,
+    "offset_bottom_px": 0,
+    "offset_left_px": 0,
+    "offset_right_px": 0,
+    "line_height": 0.7,
+    "col_gap_px": 6,
+    "grid": { "left_pct": 55, "right_pct": 44, "border": true },
+
+    "seller_block": {
+      "show": true,
+      "box_height_px": 133,
+      "box_padding_px": 6,
+      "labels_px": 18,
+      "text_px": 18,
+      "label_join_th_en": true,          
+      "email_phone_same_row": true,      
+
+      "top_left": {                      
+        "show": true,
+        "text": "JOB No.",
+        "bind": "job_no",                
+        "font_px": 14
+      },
+
+      "fields": [
+        { "label_th": "นามผู้ขาย", "label_en": "SUPPLIER NAME", "bind": "party.name|customer.name" },
+        { "label_th": "ที่อยู่", "bind": "party.address|customer.address" },
+        { "label_th": "เลขประจำตัวผู้เสียภาษีอากร", "bind": "party.tax_id|customer.tax_id" },
+        { "label_th": "อีเมล", "bind": "party.email|customer.email" },
+        { "label_th": "โทร", "bind": "party.phone|customer.phone" }
+      ]
+    },
+
+    "right_info": {
+      "show": true,
+      "boxed": true,               
+      "gap_px": 6,
+      "box_padding_px": 6,
+      "row1_height_px": 64,
+      "row2_height_px": 64,
+      "label_px": 14,
+      "value_px": 20,
+      "value_align": "right", 
+      "value_valign": "bottom",     
+      "col_split_pct": [49, 49],
+      "offset_top_px": -1, 
+
+      "top_right_note": {          
+        "show": true,
+        "label": "เอกสารออกเป็นชุด",
+        "bind": "document_set_note",
+        "font_px": 20
+      },
+
+      "row1": [
+        { "label": "วันที่เสนอราคา/DATE", "bind": "doc_date_dmy|document_date" },
+        { "label": "เลขที่ใบสั่งซื้อ/No.", "bind": "display_no" }
+      ],
+      "row2": [
+        { "label": "เลขที่เอกสารอ้างอิง", "bind": "po_numbers|po_number" },
+        { "label": "รหัสผู้ขาย/SUPPLIER CODE", "bind": "party.customer_no|customer.customer_no" }
+      ]
+    },
+
+    "terms_block": {
+      "show": true,
+      "gap_px": 6,
+      "box_height_px": 60,
+      "label_th_px": 15,
+      "label_en_px": 15,
+      "value_px": 15,
+      "defaults": {
+        "term": "CREDIT 30 DAYS",
+        "price_validity": "BANK TRANSFER",
+        "delivery_validity": "DELIVERY WITHIN 30 DAYS"
+      },
+      "labels": [
+        { "th": "เงื่อนไขการชำระเงิน", "en": "PAYMENT TERMS" },
+        { "th": "วิธีชำระเงิน", "en": "PAYMENT METHOD" },
+        { "th": "กำหนดส่งมอบสินค้า", "en": "DELIVERY SCHEDULE" }
+      ]
+    }
+  },
+
+
+
+  "items_table": {
+    "head_rows": 2,
+    "head_px": 18,
+    "head_padding_px": 2, 
+    "head_height_px": 26,
+    "row_height_px": 31,
+    "min_rows": 10,
+    "body_hlines": false, 
+    "columns": [
+      { "key": "no",         "label_th": "ลำดับ",       "label_en": "ITEM",        "width_px": 68,  "align": "center" },
+      { "key": "desc",       "label_th": "รายการสินค้า", "label_en": "DESCRIPTION", "width_px": 367, "align": "left"   },
+      { "key": "qty",        "label_th": "จำนวน",       "label_en": "QUANTITY",    "width_px": 86,  "align": "right"  },
+      { "key": "unit_price", "label_th": "ราคาต่อหน่วย","label_en": "UNIT PRICE",  "width_px": 89,  "align": "right"  },
+      { "key": "amount",     "label_th": "ราคารวม",     "label_en": "AMOUNT",      "width_px": 117, "align": "right"  }
+    ],
+    "desc_stack": {
+      "name_px": 18,
+      "product_no_px": 16,
+      "product_no_color": "#555"
+    },
+    "value_px": 20
+  },
+
+  "summary": {
+    "margin_top_px": 0,
+    "remark": {
+      "block_gap_px": 0,
+      "title_px": 18,
+      "min_height_px": 80,
+      "fallback_bind": "grand_total_baht_text"
+    },
+    "totals_box": {
+      "width_px": 270.5,              
+      "value_box_w_px": 120,        
+      "row_h_px": 35,
+      "rows_count": 3,
+      "margin_top_px": 0,               
+      "gap_px": 6,                  
+      "label_px": 16,               
+      "value_px": 22,               
+      "border_px": 1,  
+      "label_offset_y_px": 4              
+    },
+    "fine_print": {
+    "left_index": 1,
+    "right_index": 0,
+    "th_px": 14,
+    "en_px": 14,
+    "lines": [
+      { "th": "สินค้าต้องเป็นของใหม่และเป็นไปตามสเปกที่ระบุ บริษัทขอสงวนสิทธิ์ปฏิเสธสินค้าที่ไม่เป็นไปตามสเปก",
+        "en": "Goods must be new and conform to the specified specification; buyer reserves the right to reject non-conforming goods." },
+      { "th": "โปรดยืนยันการรับใบสั่งซื้อและกำหนดส่งมอบเป็นลายลักษณ์อักษรก่อนเริ่มผลิตหรือจัดส่ง",
+        "en": "Please acknowledge this PO  before production or shipment." }
+
+    ]
+  }
+  },
+
+
+  "signatures": {
+    "boxes": [
+      { "th": "ผู้ขายยืนยัน", "en": "SUPPLIER ACKNOWLEDGED BY" },
+      { "th": "วันที่", "en": "DATE" },
+      { "th": "ผู้อนุมัติสั่งซื้อ", "en": "APPROVED BY" },
+      { "th": "ลงนาม", "en": "SIGNATURE : MIDI ENGINEERING" }
+    ],
+    "min_height_px": 65,
+    "label_th_px": 16,
+    "label_en_px": 14,
+
+    "margin_top_px": 6,   
+    "gap_px": 6           
+  },
+
+  "bindings": {
+    "doc_title": "header_title",
+    "company_name": "party.name|company.name",
+    "customer_block": "customer|party",
+    "items": "items",
+    "totals": "totals",
+    "remark": "remark"
+  }
+}
