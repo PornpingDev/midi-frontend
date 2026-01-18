@@ -31,7 +31,7 @@ ChartJS.register(
   ChartTitle
 );
 
-const API_BASE = import.meta.env.VITE_API_BASE;
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
 /* ---------- Helpers ---------- */
 const toNum = (x) => (typeof x === "number" ? x : parseFloat(x || "0"));
