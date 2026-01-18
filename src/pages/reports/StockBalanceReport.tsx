@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import { useSearchParams } from "react-router-dom";
 
-const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:3000";
+const API_BASE = import.meta.env.VITE_API_BASE;
 
 /** เรียก API ครั้งเดียว แล้วกรอง/เรียงบนหน้าให้หมด เพื่อให้พฤติกรรมเหมือนหน้าส่วนอื่น */
 async function loadAll() {

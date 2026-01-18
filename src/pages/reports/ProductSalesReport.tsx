@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 
-const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:3000";
+const API_BASE = import.meta.env.VITE_API_BASE;
 
 /** ---------------- Helpers ---------------- */
 const toNum = (x) => (typeof x === "number" ? x : parseFloat(x || "0"));
