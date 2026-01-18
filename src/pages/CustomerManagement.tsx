@@ -15,7 +15,7 @@ const CustomerManagement = () => {
 
   const fetchCustomers = async () => {
     try {
-      const res = await axios.get('http://localhost:3000/customers');
+      const res = await axios.get('/customers');
       setCustomers(res.data);
     } catch (error: any) {
       console.error('โหลดข้อมูลลูกค้าไม่สำเร็จ:', error?.response?.status, error?.response?.data || error?.message);
@@ -45,7 +45,7 @@ const CustomerManagement = () => {
 
   const handleDeleteCustomer = async (id) => {
     try {
-      await axios.delete(`http://localhost:3000/customers/${id}`);
+      await axios.delete(`/customers/${id}`);
       setCustomers(customers.filter((c) => c.id !== id));
     } catch (error) {
       console.error('เกิดข้อผิดพลาดในการลบลูกค้า:', error);
@@ -57,13 +57,13 @@ const CustomerManagement = () => {
     try {
       if (customer.id) {
         // PUT (แก้ไข)
-        await axios.put(`http://localhost:3000/customers/${customer.id}`, customer, {
+        await axios.put(`/customers/${customer.id}`, customer, {
           headers: { 'Content-Type': 'application/json' }
         });
       } else {
         // POST (เพิ่มใหม่) — ใส่ code ให้ชัวร์
         const payload = { code: customer.code || getNextCode(), ...customer };
-        await axios.post('http://localhost:3000/customers', payload, {
+        await axios.post('/customers', payload, {
           headers: { 'Content-Type': 'application/json' }
         });
       }

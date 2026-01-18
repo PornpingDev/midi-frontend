@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build:prod": "vite build --mode production"
   },
   "dependencies": {
     "@fontsource/noto-sans-thai": "^5.1.1",

@@ -46,7 +46,7 @@ const StockManagement = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/products");
+      const response = await axios.get("/products");
       const data = response.data.map((item) => ({
         id: item.id,                     
         product_no: item.product_no,
@@ -131,7 +131,7 @@ const StockManagement = () => {
 
   const fetchCustomers = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/customers");
+      const res = await axios.get("/customers");
       setCustomers(res.data);
     } catch (err) {
       console.error("❌ ดึงข้อมูลลูกค้าล้มเหลว:", err);
@@ -144,7 +144,7 @@ const StockManagement = () => {
   // 📊 เปิด Modal พร้อมข้อมูลราคาขาย
   const handleShowPrices = async (productId) => {
     try {
-      const response = await axios.get(`http://localhost:3000/product-prices?product_id=${productId}`);
+      const response = await axios.get(`/product-prices?product_id=${productId}`);
       setSelectedPrices(response.data);
       setShowModal(true);
     } catch (error) {
@@ -163,7 +163,7 @@ const StockManagement = () => {
   // ❌ ลบสินค้า
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:3000/products/${deleteProductId}`);
+      await axios.delete(`/products/${deleteProductId}`);
       await fetchProducts(); // ดึงข้อมูลใหม่ให้ sync กับ DB
       setShowDeleteModal(false);
     } catch (err) {
@@ -190,7 +190,7 @@ const StockManagement = () => {
     }
 
     try {
-      await axios.post("http://localhost:3000/products", {
+      await axios.post("/products", {
         product_no: newProduct.id,
         product_name: newProduct.name,
         cost: Number(newProduct.cost),
@@ -243,7 +243,7 @@ const StockManagement = () => {
   const handleShowEditModal = async (product) => {
     try {
       // 👉 1. ดึงราคาขายเฉพาะลูกค้าจาก API
-      const res = await axios.get(`http://localhost:3000/product-prices?product_id=${product.id}`);
+      const res = await axios.get(`/product-prices?product_id=${product.id}`);
 
       // 👉 2. รวมข้อมูล product + prices
       setSelectedProduct({
@@ -291,7 +291,7 @@ const StockManagement = () => {
     }
 
     try {
-      await axios.put(`http://localhost:3000/products/${p.id}`, {
+      await axios.put(`/products/${p.id}`, {
         product_no: p.product_no,
         product_name: p.name,
         cost: Number(p.cost),
@@ -320,7 +320,7 @@ const StockManagement = () => {
     }
 
     try {
-      await axios.post("http://localhost:3000/product-prices", {
+      await axios.post("/product-prices", {
         product_id: selectedProduct.id,
         customer_id: selectedCustomerId,
         price: newCustomerPrice,
@@ -348,7 +348,7 @@ const StockManagement = () => {
 
   const handleSaveEditPrice = async (priceId) => {
     try {
-      await axios.put(`http://localhost:3000/product-prices/${priceId}`, {
+      await axios.put(`/product-prices/${priceId}`, {
         price: editedPrice,
       });
 
@@ -371,7 +371,7 @@ const StockManagement = () => {
     if (!window.confirm("คุณแน่ใจหรือไม่ว่าต้องการลบราคานี้?")) return;
 
     try {
-      await axios.delete(`http://localhost:3000/product-prices/${priceId}`);
+      await axios.delete(`/product-prices/${priceId}`);
 
       const latestProduct = products.find(p => p.id === selectedProduct.id);
       if (latestProduct) {
@@ -403,7 +403,7 @@ const StockManagement = () => {
     }
 
     try {
-      const res = await axios.post("http://localhost:3000/purchase-orders/auto-one", {
+      const res = await axios.post("/purchase-orders/auto-one", {
         product_no: product_no,
       });
 

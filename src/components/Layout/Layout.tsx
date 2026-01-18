@@ -57,7 +57,7 @@ const Layout = () => {
     try {
       setSubmitting(true);
       await axios.post(
-        "http://localhost:3000/me/change-password",
+        "/me/change-password",
         { currentPassword, newPassword },
         { headers: { "Content-Type": "application/json" }, withCredentials: true }
       );

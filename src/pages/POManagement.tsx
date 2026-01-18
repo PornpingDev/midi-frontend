@@ -109,7 +109,7 @@ const POManagement = () => {
   // ---------- โหลดรายการ PO ----------
   const fetchPurchaseOrders = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/purchase-orders");
+      const res = await axios.get("/purchase-orders");
       setPurchaseOrders(res.data || []);
     } catch (e) {
       console.error("❌ โหลด PO ไม่สำเร็จ:", e);
@@ -124,7 +124,7 @@ const POManagement = () => {
   // ---------- โหลดผู้ขาย ----------
   const fetchSuppliers = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/suppliers");
+      const res = await axios.get("/suppliers");
       setSuppliers(res.data || []);
     } catch (e) {
       console.error("❌ โหลด suppliers ไม่สำเร็จ:", e);
@@ -166,7 +166,7 @@ const POManagement = () => {
   const handlePrintPO = async (poId: number) => {
     try {
       // 1) ขอ payload จาก backend
-      const { data } = await axios.get(`http://localhost:3000/purchase-orders/${poId}/print-payload`, {
+      const { data } = await axios.get(`/purchase-orders/${poId}/print-payload`, {
         withCredentials: true,
       });
 
@@ -203,7 +203,7 @@ const POManagement = () => {
   // ดึงสินค้าตามผู้ขายที่เลือก (ถ้าไม่ส่ง supplierCode จะใช้ราคาผู้ผลิตหลัก / cost)
   const fetchProducts = async (supplierCode) => {
     try {
-      const res = await axios.get("http://localhost:3000/products/for-po", {
+      const res = await axios.get("/products/for-po", {
         params: supplierCode ? { supplier_id: supplierCode } : {},
       });
 
@@ -393,7 +393,7 @@ const POManagement = () => {
 
     try {
       setSavingPO(true);
-      const res = await axios.post("http://localhost:3000/purchase-orders", payload, {
+      const res = await axios.post("/purchase-orders", payload, {
         headers: { "Content-Type": "application/json" },
       });
 
@@ -431,7 +431,7 @@ const POManagement = () => {
     try {
       // backend: GET /purchase-orders/:id/for-receive
       const { data } = await axios.get(
-        `http://localhost:3000/purchase-orders/${po.id}/for-receive`
+        `/purchase-orders/${po.id}/for-receive`
       );
       setReceivePreview(data);
 
@@ -478,7 +478,7 @@ const POManagement = () => {
 
     try {
       const { data } = await axios.get(
-        `http://localhost:3000/purchase-orders/${selectedPO.id}/receive-history`
+        `/purchase-orders/${selectedPO.id}/receive-history`
       );
       setHistoryData(data || null);
       setViewMode("history");      // ✅ เปลี่ยนมาโหมดประวัติใน modal เดิม
@@ -523,7 +523,7 @@ const POManagement = () => {
       setApproving(true);
 
       await axios.post(
-        `http://localhost:3000/purchase-orders/${selectedPO.id}/approve`
+        `/purchase-orders/${selectedPO.id}/approve`
       );
 
       setToast({
@@ -607,7 +607,7 @@ const POManagement = () => {
       };
 
       const { data } = await axios.post(
-        "http://localhost:3000/goods-receipts/receive-now",
+        "/goods-receipts/receive-now",
         payload,
         { headers: { "Content-Type": "application/json" } }
       );

@@ -24,7 +24,7 @@ const [salesOrders, setSalesOrders] = useState([]);
 useEffect(() => {
   const fetchSalesOrders = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/sales-orders");
+      const response = await axios.get("/sales-orders");
       setSalesOrders(response.data);
     } catch (error) {
       console.error("❌ ดึง Sales Orders ไม่สำเร็จ:", error);
@@ -40,7 +40,7 @@ const [customers, setCustomers] = useState([]);
 useEffect(() => {
   const fetchCustomers = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/customers');
+      const response = await axios.get('/customers');
       setCustomers(response.data);
     } catch (err) {
       console.error('โหลดลูกค้าไม่สำเร็จ:', err);
@@ -54,52 +54,7 @@ useEffect(() => {
 
 
 
-/*
-  const handleDeductStock = async () => {
-    if (!currentOrder || reservedItems.length === 0) {
-      alert("❌ ไม่มีรายการที่จอง");
-      return;
-    }
 
-    try {
-      const itemsToDeduct = reservedItems.map((item) => {
-        const found = stockParts.find((p) => p.value === item.part);
-        return {
-          product_id: found?.product_id,
-          quantity: item.quantity,
-        };
-      }).filter(item => item.product_id);
-
-      if (itemsToDeduct.length === 0) {
-        alert("❌ ไม่พบสินค้าใน stockParts");
-        return;
-      }
-
-      const response = await axios.post("http://localhost:3000/deduct-stock", {
-        items: itemsToDeduct,
-        employee_id: 1,
-        reason: `ตัด stock จาก SO ${currentOrder.sales_order_no}`,
-      });
-
-      alert("✅ ตัด stock สำเร็จแล้ว!");
-
-      // ✅ อัปเดต status ของ SO
-      setSalesOrders((prev) =>
-        prev.map((order) =>
-          order.id === currentOrder.id
-            ? { ...order, status: "ตัด stock แล้ว" }
-            : order
-        )
-      );
-
-      setReservedItems([]);
-      setShowModal(false);
-    } catch (err) {
-      console.error("❌ ตัด stock ล้มเหลว:", err);
-      alert("❌ เกิดข้อผิดพลาดในการตัด stock");
-    }
-  };
-*/
 
 
   const [newItem, setNewItem] = useState({ part: "", quantity: "", available: 0, unit: "" });
@@ -289,10 +244,10 @@ useEffect(() => {
       };
 
       // 📡 POST คำสั่งขายจริง
-      await axios.post("http://localhost:3000/sales-orders", payload);
+      await axios.post("/sales-orders", payload);
 
       // 📌 โหลดรายการคำสั่งขายใหม่จาก backend
-      const response = await axios.get("http://localhost:3000/sales-orders");
+      const response = await axios.get("/sales-orders");
       setSalesOrders(response.data);
 
       setToast({
@@ -318,8 +273,8 @@ useEffect(() => {
     setLoadingSummary(true);
     try {
       const [sumRes, rsvRes] = await Promise.all([
-        axios.get(`http://localhost:3000/sales-orders/${soId}/items-summary`),
-        axios.get(`http://localhost:3000/api/reservations/reservations/${soId}`),
+        axios.get(`/sales-orders/${soId}/items-summary`),
+        axios.get(`/api/reservations/reservations/${soId}`),
       ]);
 
       setItemSummaries(sumRes.data || []);
@@ -374,14 +329,14 @@ useEffect(() => {
 
     try {
       // 1) เขียนลง DB
-      await axios.post(`http://localhost:3000/sales-orders/${currentOrder.id}/items`, {
+      await axios.post(`/sales-orders/${currentOrder.id}/items`, {
         product_id: found.product_id,
         quantity: Number(newItem.quantity),
       });
 
       // 2) รีเฟรชตารางสรุป 5 ค่า
       const sumRes = await axios.get(
-        `http://localhost:3000/sales-orders/${currentOrder.id}/items-summary`
+        `/sales-orders/${currentOrder.id}/items-summary`
       );
       setItemSummaries(sumRes.data || []);
 
@@ -424,9 +379,9 @@ useEffect(() => {
   //  ฟังก์ชันลบ Sales Order
   const handleDeleteOrder = async () => {
     try {
-      await axios.delete(`http://localhost:3000/sales-orders/${orderToDelete}`); // 🔥 ลบจริงจาก backend
+      await axios.delete(`/sales-orders/${orderToDelete}`); // 🔥 ลบจริงจาก backend
 
-      const response = await axios.get("http://localhost:3000/sales-orders"); // 🌀 โหลดใหม่
+      const response = await axios.get("/sales-orders"); // 🌀 โหลดใหม่
       setSalesOrders(response.data);
 
       alert("✅ ลบคำสั่งขายเรียบร้อยแล้ว");
@@ -502,7 +457,7 @@ useEffect(() => {
 
   const fetchStockParts = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/products");
+      const response = await axios.get("/products");
       const formatted = response.data.map((item) => ({
         value: item.product_name,
         label: `${item.product_name} (เหลือ: ${item.available} ${item.unit || ""})`,
@@ -531,7 +486,7 @@ useEffect(() => {
 
     try {
       const { data } = await axios.get(
-        `http://localhost:3000/sales-orders/${order.id}/for-delivery`
+        `/sales-orders/${order.id}/for-delivery`
       );
       setDeliveryPreview(data);
 
@@ -589,7 +544,7 @@ useEffect(() => {
     setSendingNow(true);
     try {
       const { data } = await axios.post(
-        "http://localhost:3000/api/delivery-notes/send-now",
+        "/api/delivery-notes/send-now",
         { sales_order_id: selectedOrder.id, item_ids: deliverySelectedIds },
         { headers: { "Content-Type": "application/json" } }
       );
@@ -605,7 +560,7 @@ useEffect(() => {
       setDeliveryPreview(null);
       setDeliverySelectedIds([]);
 
-      const soRes = await axios.get("http://localhost:3000/sales-orders");
+      const soRes = await axios.get("/sales-orders");
       setSalesOrders(soRes.data);
     } catch (e: any) {
       setToast({
@@ -653,7 +608,7 @@ useEffect(() => {
     }
 
     try {
-      await axios.post("http://localhost:3000/api/reservations/reserve-item", {
+      await axios.post("/api/reservations/reserve-item", {
         sales_order_id: currentOrder.id,
         product_id: productId,
         quantity: qty,
@@ -661,7 +616,7 @@ useEffect(() => {
 
       // รีเฟรชสรุป 5 ค่า
       const sumRes = await axios.get(
-        `http://localhost:3000/sales-orders/${currentOrder.id}/items-summary`
+        `/sales-orders/${currentOrder.id}/items-summary`
       );
       setItemSummaries(sumRes.data || []);
 
@@ -670,7 +625,7 @@ useEffect(() => {
 
 
       // รีเฟรชรายการ SO เพื่ออัปเดตสถานะ (รอจอง/จองบางส่วน/จองทั้งหมด)
-      const soRes = await axios.get("http://localhost:3000/sales-orders");
+      const soRes = await axios.get("/sales-orders");
       setSalesOrders(soRes.data);
 
       // ล้างจำนวนในช่องของสินค้านี้
@@ -700,7 +655,7 @@ useEffect(() => {
     if (!q || q <= 0) return setToast({ show: true, message: "กรุณากรอกจำนวนให้ถูกต้อง", variant: "warning" });
 
     try {
-      await axios.post("http://localhost:3000/api/reservations/reserve-item", {
+      await axios.post("/api/reservations/reserve-item", {
         sales_order_id: currentOrder.id,
         product_id: productId,
         quantity: q,
@@ -711,7 +666,7 @@ useEffect(() => {
       await fetchStockParts(); 
 
       // รีเฟรชสถานะ SO บนหน้ารายการ
-      const soRes = await axios.get("http://localhost:3000/sales-orders");
+      const soRes = await axios.get("/sales-orders");
       setSalesOrders(soRes.data);
     } catch (e: any) {
       setToast({ show: true, message: `❌ จองไม่สำเร็จ: ${e?.response?.data?.message || "เกิดข้อผิดพลาด"}`, variant: "danger" });
@@ -728,14 +683,14 @@ useEffect(() => {
     if (!newQty || newQty <= 0) return setToast({ show: true, message: "กรุณากรอกจำนวนให้ถูกต้อง", variant: "warning" });
 
     try {
-      await axios.put(`http://localhost:3000/api/reservations/reserve-item/${r.id}`, {
+      await axios.put(`/api/reservations/reserve-item/${r.id}`, {
         quantity: newQty,
       });
       setToast({ show: true, message: "✅ อัปเดตจำนวนจองสำเร็จ", variant: "success" });
       await refreshModalData(currentOrder.id);
       await fetchStockParts(); 
 
-      const soRes = await axios.get("http://localhost:3000/sales-orders");
+      const soRes = await axios.get("/sales-orders");
       setSalesOrders(soRes.data);
     } catch (e: any) {
       setToast({ show: true, message: `❌ อัปเดตไม่สำเร็จ: ${e?.response?.data?.message || "เกิดข้อผิดพลาด"}`, variant: "danger" });
@@ -749,12 +704,12 @@ useEffect(() => {
     if (!r?.id) return;
 
     try {
-      await axios.patch(`http://localhost:3000/api/reservations/reserve-item/${r.id}/cancel`);
+      await axios.patch(`/api/reservations/reserve-item/${r.id}/cancel`);
       setToast({ show: true, message: "✅ ยกเลิกการจองแล้ว", variant: "success" });
       await refreshModalData(currentOrder.id);
       await fetchStockParts(); 
 
-      const soRes = await axios.get("http://localhost:3000/sales-orders");
+      const soRes = await axios.get("/sales-orders");
       setSalesOrders(soRes.data);
     } catch (e: any) {
       setToast({ show: true, message: `❌ ยกเลิกไม่สำเร็จ: ${e?.response?.data?.message || "เกิดข้อผิดพลาด"}`, variant: "danger" });
@@ -769,7 +724,7 @@ useEffect(() => {
     try {
       // เปลี่ยนมาใช้ PUT + path ให้ตรง backend
       await axios.put(
-        `http://localhost:3000/sales-orders/${currentOrder.id}/items/${productId}/soft-delete`
+        `/sales-orders/${currentOrder.id}/items/${productId}/soft-delete`
       );
 
       setToast({ show: true, message: "✅ ลบรายการสินค้าแล้ว", variant: "success" });
@@ -778,7 +733,7 @@ useEffect(() => {
       await Promise.all([refreshModalData(currentOrder.id), fetchStockParts()]);
 
       // อัปเดตรายการ SO (เพื่อ status)
-      const soRes = await axios.get("http://localhost:3000/sales-orders");
+      const soRes = await axios.get("/sales-orders");
       setSalesOrders(soRes.data);
     } catch (e: any) {
       console.log("soft-delete error:", e?.response?.data);

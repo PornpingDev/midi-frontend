@@ -14,7 +14,7 @@ const SupplierManagement = () => {
 
   const fetchSuppliers = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/suppliers');
+      const response = await axios.get('/suppliers');
       setSuppliers(response.data);
     } catch (error: any) {
       console.error(
@@ -71,7 +71,7 @@ const SupplierManagement = () => {
   // ✅ ลบ Supplier
   const handleDeleteSupplier = async (id) => {
     try {
-      await axios.delete(`http://localhost:3000/suppliers/${id}`); // ใช้ API soft delete
+      await axios.delete(`/suppliers/${id}`); // ใช้ API soft delete
       const updatedSuppliers = suppliers.filter((s) => s.id !== id); // อัปเดต state ด้านหน้า
       setSuppliers(updatedSuppliers);
     } catch (error) {
@@ -93,7 +93,7 @@ const SupplierManagement = () => {
         };
 
         await axios.put(
-          `http://localhost:3000/suppliers/${supplier.id}`,
+          `/suppliers/${supplier.id}`,
           payload,
           { headers: { 'Content-Type': 'application/json' } }
         );
@@ -106,7 +106,7 @@ const SupplierManagement = () => {
             getNextCode(),
         };
 
-        await axios.post('http://localhost:3000/suppliers', payload, {
+        await axios.post('/suppliers', payload, {
           headers: { 'Content-Type': 'application/json' },
         });
       }

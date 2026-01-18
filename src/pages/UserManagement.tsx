@@ -30,7 +30,7 @@ const UserManagement = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/users');
+      const response = await axios.get('/users');
       const usersWithCode = response.data.map((user, index) => ({
         ...user,
         code: user.employee_code || `EMP-${String(index + 1).padStart(3, '0')}`
@@ -48,7 +48,7 @@ const UserManagement = () => {
 
   const fetchNextCode = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/users/last-code');
+      const response = await axios.get('/users/last-code');
       const lastCode = response.data.lastCode; // ตัวอย่าง: "EMP-006"
       let nextNumber = 1;
       if (lastCode) {
@@ -94,7 +94,7 @@ const UserManagement = () => {
   // ✅ ลบพนักงาน
   const handleDeleteUser = async (id) => {
     try {
-      await axios.delete(`http://localhost:3000/users/${id}`);
+      await axios.delete(`/users/${id}`);
       await fetchUsers();
       setToast({ show: true, message: '✅ ลบพนักงานสำเร็จ', variant: 'success' });
     } catch (error) {
@@ -117,7 +117,7 @@ const UserManagement = () => {
     const hashedPassword = bcrypt.hashSync(user.password, 10);
     try {
       if (user.id) {
-        await axios.put(`http://localhost:3000/users/${user.id}`, {
+        await axios.put(`/users/${user.id}`, {
           employee_code: user.code,
           name: user.name,
           phone: user.phone,
@@ -128,7 +128,7 @@ const UserManagement = () => {
           role: user.role
         });
       } else {
-        await axios.post('http://localhost:3000/users', {
+        await axios.post('/users', {
           employee_code: user.code,
           name: user.name,
           phone: user.phone,
@@ -162,7 +162,7 @@ const UserManagement = () => {
     const id = confirm.userId;
     if (!id) return;
     try {
-      await axios.put(`http://localhost:3000/users/${id}/reset-password`);
+      await axios.put(`/users/${id}/reset-password`);
       setConfirm({ show: false, userId: null });
       setToast({ show: true, message: '✅ รีเซ็ตรหัสผ่านสำเร็จ (password123)', variant: 'success' });
       await fetchUsers();

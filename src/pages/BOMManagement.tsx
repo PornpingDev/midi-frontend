@@ -31,7 +31,7 @@ const BOMManagement = () => {
 
   const [boms, setBoms] = useState([]);
     useEffect(() => {
-      axios.get("http://localhost:3000/boms")
+      axios.get("/boms")
         .then((res) => {
           const transformed = res.data.map((bom) => ({
             id: bom.id,               // ✅ ใช้ ID จริง (INT)
@@ -70,7 +70,7 @@ const BOMManagement = () => {
     useEffect(() => {
       const fetchStockParts = async () => {
         try {
-          const res = await axios.get("http://localhost:3000/products");
+          const res = await axios.get("/products");
           const formatted = res.data.map((item) => ({
             value: item.id,
             label: `${item.product_name} (เหลือ: ${item.available})`,
@@ -113,10 +113,10 @@ const BOMManagement = () => {
           components: validComponents,
         };
     
-        await axios.post("http://localhost:3000/boms/full", payload);
+        await axios.post("/boms/full", payload);
     
         // ♻️ โหลด BOM ใหม่
-        const res = await axios.get("http://localhost:3000/boms");
+        const res = await axios.get("/boms");
         const transformed = res.data.map((bom) => ({
           id: bom.id,
           code: bom.bom_code,
@@ -161,7 +161,7 @@ const BOMManagement = () => {
 
   const handleViewBOM = async (bom) => {
     try {
-      const res = await axios.get(`http://localhost:3000/bom-components?bom_id=${bom.id}`);
+      const res = await axios.get(`/bom-components?bom_id=${bom.id}`);
       
       const components = res.data.map((comp) => ({
         name: comp.name,
@@ -178,7 +178,7 @@ const BOMManagement = () => {
 
   const handleEditBOM = async (bom) => {
     try {
-      const res = await axios.get(`http://localhost:3000/bom-components?bom_id=${bom.id}`);
+      const res = await axios.get(`/bom-components?bom_id=${bom.id}`);
       const components = res.data.map((comp) => ({
         part: Number(comp.product_id),
         quantity: comp.quantity_required,
@@ -230,10 +230,10 @@ const BOMManagement = () => {
       };
   
       // 3️⃣ ส่ง PUT ไปยัง backend
-      await axios.put(`http://localhost:3000/boms/full/${selectedBOM.id}`, payload);
+      await axios.put(`/boms/full/${selectedBOM.id}`, payload);
   
       // 4️⃣ โหลด BOM ใหม่หลังบันทึก
-      const res = await axios.get("http://localhost:3000/boms");
+      const res = await axios.get("/boms");
       const transformed = res.data.map((bom) => ({
         id: bom.id,
         code: bom.bom_code,
@@ -263,10 +263,10 @@ const BOMManagement = () => {
     if (!window.confirm("คุณแน่ใจว่าต้องการลบ BOM นี้หรือไม่?")) return;
   
     try {
-      await axios.delete(`http://localhost:3000/boms/${id}`);
+      await axios.delete(`/boms/${id}`);
       
       // โหลด BOM ใหม่หลังลบ
-      const res = await axios.get("http://localhost:3000/boms");
+      const res = await axios.get("/boms");
       const transformed = res.data.map((bom) => ({
         id: bom.id,
         code: bom.bom_code,
@@ -285,9 +285,9 @@ const BOMManagement = () => {
     if (!bomToDelete || !bomToDelete.id) return;
   
     try {
-      await axios.delete(`http://localhost:3000/boms/${bomToDelete.id}`);
+      await axios.delete(`/boms/${bomToDelete.id}`);
   
-      const res = await axios.get("http://localhost:3000/boms");
+      const res = await axios.get("/boms");
       const transformed = res.data.map((bom) => ({
         id: bom.id,
         code: bom.bom_code,
@@ -568,7 +568,7 @@ const BOMManagement = () => {
         onClose={closeProduceModal}
         bom={produceModal.bom}
         onAfterAction={async () => {
-          const res = await axios.get("http://localhost:3000/boms");
+          const res = await axios.get("/boms");
           const transformed = res.data.map((bom) => ({
             id: bom.id, code: bom.bom_code, name: bom.bom_name,
             available: bom.bom_available ?? 0, components: []

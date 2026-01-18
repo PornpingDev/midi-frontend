@@ -36,8 +36,8 @@ export default function ProduceModal({ show, onClose, bom, onAfterAction }) {
     setLoading(true);
     try {
       const [b, p] = await Promise.all([
-        axios.get(`http://localhost:3000/boms/${bom.id}/buildability`),
-        axios.get(`http://localhost:3000/boms/${bom.id}/preview`, { params: { qty: q } }),
+        axios.get(`/boms/${bom.id}/buildability`),
+        axios.get(`/boms/${bom.id}/preview`, { params: { qty: q } }),
       ]);
       setMaxBuildable(Number(b.data?.max_buildable ?? 0));
       setRows(p.data?.components ?? []);
@@ -59,7 +59,7 @@ export default function ProduceModal({ show, onClose, bom, onAfterAction }) {
     if (!bom) return;
     setBusyAction("reserve");
     try {
-      await axios.post(`http://localhost:3000/boms/${bom.id}/reserve`, { qty });
+      await axios.post(`/boms/${bom.id}/reserve`, { qty });
       notify("✅ จองวัตถุดิบสำเร็จ", "success");
       await refreshAll(qty);
       await onAfterAction?.();
@@ -75,7 +75,7 @@ export default function ProduceModal({ show, onClose, bom, onAfterAction }) {
     if (!bom) return;
     setBusyAction("produce");
     try {
-      await axios.post(`http://localhost:3000/boms/${bom.id}/produce`, { qty });
+      await axios.post(`/boms/${bom.id}/produce`, { qty });
       notify("✅ ผลิตสำเร็จ", "success");
       await refreshAll(qty);
       await onAfterAction?.();
@@ -91,7 +91,7 @@ export default function ProduceModal({ show, onClose, bom, onAfterAction }) {
     if (!bom) return;
     setBusyAction("cancel");
     try {
-      await axios.post(`http://localhost:3000/boms/${bom.id}/cancel-reserve`, { qty });
+      await axios.post(`/boms/${bom.id}/cancel-reserve`, { qty });
       notify("✅ ยกเลิกการจองสำเร็จ", "success");
       await refreshAll(qty);
       await onAfterAction?.();

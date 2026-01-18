@@ -34,7 +34,7 @@ const PODetailView = () => {
     setLoading(true);
     try {
       const { data } = await axios.get(
-        `http://localhost:3000/purchase-orders/${id}`
+        `/purchase-orders/${id}`
       );
       setPo(data);
     } catch (e) {
