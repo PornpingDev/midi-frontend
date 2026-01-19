@@ -31,7 +31,7 @@ ChartJS.register(
   ChartTitle
 );
 
-const API_BASE = import.meta.env.VITE_API_BASE;
+
 
 /* ---------- Helpers ---------- */
 const toNum = (x) => (typeof x === "number" ? x : parseFloat(x || "0"));
@@ -123,8 +123,8 @@ export default function Dashboard() {
     (async () => {
       try {
         setLoadingR2(true);
-        const url = `${API_BASE}/api/reports/stock-balance`;
-        const { data } = await axios.get(url, { withCredentials: true });
+        const url = `/api/reports/stock-balance`;
+        const { data } = await axios.get("/api/reports/stock-balance");
         setStock(data || []);
       } finally { setLoadingR2(false); }
     })();
@@ -135,8 +135,8 @@ export default function Dashboard() {
     (async () => {
       try {
         setLoadingR3(true);
-        const url = `${API_BASE}/api/reports/delivery-progress?only_open=1`;
-        const { data } = await axios.get(url, { withCredentials: true });
+        const url = `/api/reports/delivery-progress?only_open=1`;
+        const { data } = await axios.get("/api/reports/delivery-progress?only_open=1");
         setDelivery(data || []);
       } finally { setLoadingR3(false); }
     })();
@@ -147,8 +147,8 @@ export default function Dashboard() {
     (async () => {
       try {
         setLoadingR3All(true);
-        const url = `${API_BASE}/api/reports/delivery-progress?only_open=0`;
-        const { data } = await axios.get(url, { withCredentials: true });
+        const url = `/api/reports/delivery-progress?only_open=0`;
+        const { data } = await axios.get("/api/reports/delivery-progress?only_open=0");
         setDeliveryAll(Array.isArray(data) ? data : []);
       } finally { setLoadingR3All(false); }
     })();
@@ -165,8 +165,8 @@ export default function Dashboard() {
         const params = new URLSearchParams();
         params.set("from", `${yyyy}-01`);
         params.set("to",   `${yyyy}-12`);
-        const url = `${API_BASE}/api/reports/monthly-sales-purchases?${params.toString()}`;
-        const { data } = await axios.get(url, { withCredentials: true });
+        const url = `/api/reports/monthly-sales-purchases?${params.toString()}`;
+        const { data } = await axios.get(url);
         setMonthly(Array.isArray(data) ? data : (data && data.result) || []);
       } finally { setLoadingR4(false); }
     })();
@@ -182,8 +182,8 @@ export default function Dashboard() {
         params.set("from", from);
         params.set("to",   to);
         params.set("granularity", "month");
-        const url = `${API_BASE}/api/reports/product-sales?${params.toString()}`;
-        const { data } = await axios.get(url, { withCredentials: true });
+        const url = `/api/reports/product-sales?${params.toString()}`;
+        const { data } = await axios.get(url);
         setR5Items((data && data.items) || []);
       } finally { setLoadingR5(false); }
     })();
