@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 
-const API_BASE = import.meta.env.VITE_API_BASE;
+// const API_BASE = import.meta.env.VITE_API_BASE;
 
 /* ---------- Helpers ---------- */
 function toNum(x) {
@@ -53,8 +53,8 @@ export default function DeliveryProgressReport() {
       try {
         const params = new URLSearchParams();
         if (onlyOpen) params.set("only_open", "1");
-        const url = `${API_BASE}/api/reports/delivery-progress?${params.toString()}`;
-        const { data } = await axios.get(url, { withCredentials: true });
+        const url = `/api/reports/delivery-progress?${params.toString()}`;
+        const { data } = await axios.get(url);
         setRows(data || []);
       } finally {
         setLoading(false);
