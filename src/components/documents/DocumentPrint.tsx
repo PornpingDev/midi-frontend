@@ -311,7 +311,7 @@ const HeadGrid: React.FC<{ doc: PrintDoc; layout: any }> = ({ doc, layout }) => 
   const party = doc.customer || doc.party || {};
   const poList: string[] = (doc.po_numbers?.length ? doc.po_numbers : (doc.po_number ? [doc.po_number] : []));
   const dateDMY = todayDMY(doc.document_date) || doc.doc_date_dmy || "-";
-  const email = pick("party.email|customer.email") || "";
+  // const email = pick("party.email|customer.email") || "";
   const phone = pick("party.phone|customer.phone") || "";
   const hMap = (a?: string) => a === "center" ? "center" : a === "left" ? "flex-start" : "flex-end";
   const vMap = (a?: string) => a === "middle" ? "center" : a === "bottom" ? "flex-end" : "flex-start";
@@ -368,7 +368,7 @@ const HeadGrid: React.FC<{ doc: PrintDoc; layout: any }> = ({ doc, layout }) => 
               ))}
 
             {/* เนื้อหา (ยกเว้นอีเมล/โทร) */}
-            {(email || phone) && (
+            {phone && (
               <div
                 style={{
                   display: "flex",
@@ -378,15 +378,7 @@ const HeadGrid: React.FC<{ doc: PrintDoc; layout: any }> = ({ doc, layout }) => 
                   alignItems: "baseline",
                 }}
               >
-                {email && (
-                  <div style={{ flex: "1 1 320px", minWidth: 240 }}>
-                    <Cell>
-                      <span style={{ fontSize: sb.text_px ?? 18 }}>
-                        อีเมล: {email}
-                      </span>
-                    </Cell>
-                  </div>
-                )}
+                
 
                 {phone && (
                   <div style={{ flex: "0 0 auto" }}>
@@ -764,7 +756,7 @@ const SummaryBlock: React.FC<{ totals: Totals; remark?: string; layout: any }> =
               {th}
             </div>
             {showEN && (
-              <div style={{ fontSize: Math.max(12, LBL_PX - 2), opacity: 0.9, margin: 0 }}>
+              <div style={{ fontSize: Math.max(12, LBL_PX - 2), fontWeight: 700, opacity: 1, margin: 0 }}>
                 {en}
               </div>
             )}
@@ -875,7 +867,7 @@ const SummaryBlock: React.FC<{ totals: Totals; remark?: string; layout: any }> =
           <div style={{ fontSize: fp.th_px ?? 16 }}>
             {rightLine?.th || "หากมีข้อโต้แย้งให้รีบแจ้งทางบริษัท ภายใน 7 วัน นับแต่วันรับของ มิฉะนั้นทางร้านจะมิยอมรับในความผิดพลาดใดๆ"}
           </div>
-          <div style={{ fontSize: fp.en_px ?? 14, opacity: 0.9 }}>
+          <div style={{ fontSize: fp.en_px ?? 14, fontWeight: 700, opacity: 1 }}>
             {rightLine?.en || "CLAIMS NOT MADE WITHIN 7 DAYS AFTER RECEIPT OF GOODS CANNOT BE ACCEPTED"}
           </div>
         </div>
@@ -885,7 +877,7 @@ const SummaryBlock: React.FC<{ totals: Totals; remark?: string; layout: any }> =
           <div style={{ fontSize: fp.th_px ?? 16 }}>
             {leftLine?.th || "ได้ตรวจรับมอบสินค้าตามรายการและจำนวนในสภาพที่เรียบร้อย"}
           </div>
-          <div style={{ fontSize: fp.en_px ?? 14, opacity: 0.9 }}>
+          <div style={{ fontSize: fp.en_px ?? 14, fontWeight: 700, opacity: 1 }}>
             {leftLine?.en || "GOODS ARE RECEIVED AT THE ABOVE QUANTITY AND IN THE GOOD MANNER"}
           </div>
         </div>
@@ -920,7 +912,7 @@ const Signatures: React.FC<{ form: PrintDoc["form"]; layout: any }> = ({ form, l
     <div style={{ border: "1px solid #000", minHeight: minH, padding: 6 }}>
       <div style={{ height: Math.max(0, minH - 24) }} /> {/* ช่องเซ็นชื่อ */}
       <div style={{ textAlign: "center", fontSize: thPx }}>{labelTH}</div>
-      <div style={{ textAlign: "center", fontSize: enPx, opacity: 0.9 }}>{labelEN}</div>
+      <div style={{ textAlign: "center", fontSize: enPx, fontWeight: 700, opacity: 1 }}>{labelEN}</div>
     </div>
   );
 
