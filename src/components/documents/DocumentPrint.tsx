@@ -874,7 +874,7 @@ const SummaryBlock: React.FC<{ totals: Totals; remark?: string; layout: any }> =
 
         {/* ขวา: หากมีข้อโต้แย้ง… */}
         <div style={{ width: RIGHT_W, padding: 6 }}>
-          <div style={{ fontSize: fp.th_px ?? 16 }}>
+          <div style={{ fontSize: fp.th_px ?? 16, fontWeight: 700, opacity: 1 }}>
             {leftLine?.th || "ได้ตรวจรับมอบสินค้าตามรายการและจำนวนในสภาพที่เรียบร้อย"}
           </div>
           <div style={{ fontSize: fp.en_px ?? 14, fontWeight: 700, opacity: 1 }}>
