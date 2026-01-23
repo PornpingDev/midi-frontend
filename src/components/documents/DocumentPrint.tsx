@@ -865,20 +865,20 @@ const SummaryBlock: React.FC<{ totals: Totals; remark?: string; layout: any }> =
         {/* ซ้าย: ได้ตรวจรับ… */}
         <div style={{ flex: 1, padding: 6, borderRight: BORDER_LINE }}>
           <div style={{ fontSize: fp.th_px ?? 16 }}>
-            {rightLine?.th || "หากมีข้อโต้แย้งให้รีบแจ้งทางบริษัท ภายใน 7 วัน นับแต่วันรับของ มิฉะนั้นทางร้านจะมิยอมรับในความผิดพลาดใดๆ"}
+            {rightLine?.th || "หากมีข้อโต้แย้งใด ๆ กรุณาแจ้งให้บริษัททราบภายในระยะเวลา 7 วัน นับแต่วันที่ได้รับสินค้า มิฉะนั้นบริษัทจะถือว่าลูกค้าได้ตรวจรับสินค้าเรียบร้อยแล้ว และขอสงวนสิทธิ์ไม่รับผิดชอบต่อความผิดพลาดใด ๆ"}
           </div>
           <div style={{ fontSize: fp.en_px ?? 14, fontWeight: 700, opacity: 1 }}>
-            {rightLine?.en || "CLAIMS NOT MADE WITHIN 7 DAYS AFTER RECEIPT OF GOODS CANNOT BE ACCEPTED"}
+            {rightLine?.en || "Any claims must be submitted within 7 days from the date of receipt of the goods. Claims made after this period will not be accepted."}
           </div>
         </div>
 
         {/* ขวา: หากมีข้อโต้แย้ง… */}
         <div style={{ width: RIGHT_W, padding: 6 }}>
           <div style={{ fontSize: fp.th_px ?? 16, fontWeight: 700, opacity: 1 }}>
-            {leftLine?.th || "ได้ตรวจรับมอบสินค้าตามรายการและจำนวนในสภาพที่เรียบร้อย"}
+            {leftLine?.th || "ผู้รับได้ตรวจรับสินค้าตามรายการและจำนวนครบถ้วนแล้ว โดยสินค้าอยู่ในสภาพเรียบร้อยสมบูรณ์"}
           </div>
           <div style={{ fontSize: fp.en_px ?? 14, fontWeight: 700, opacity: 1 }}>
-            {leftLine?.en || "GOODS ARE RECEIVED AT THE ABOVE QUANTITY AND IN THE GOOD MANNER"}
+            {leftLine?.en || "The goods have been received in the quantities stated above and in good condition."}
           </div>
         </div>
       </div>
