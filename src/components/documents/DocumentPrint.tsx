@@ -864,7 +864,7 @@ const SummaryBlock: React.FC<{ totals: Totals; remark?: string; layout: any }> =
       <div style={{ display: "flex", border: BORDER_LINE }}>
         {/* ซ้าย: ได้ตรวจรับ… */}
         <div style={{ flex: 1, padding: 6, borderRight: BORDER_LINE }}>
-          <div style={{ fontSize: fp.th_px ?? 16 }}>
+          <div style={{ fontSize: fp.th_px ?? 16, fontWeight: 700, opacity: 1 }}>
             {rightLine?.th || "หากมีข้อโต้แย้งใด ๆ กรุณาแจ้งให้บริษัททราบภายในระยะเวลา 7 วัน นับแต่วันที่ได้รับสินค้า มิฉะนั้นบริษัทจะถือว่าลูกค้าได้ตรวจรับสินค้าเรียบร้อยแล้ว และขอสงวนสิทธิ์ไม่รับผิดชอบต่อความผิดพลาดใด ๆ"}
           </div>
           <div style={{ fontSize: fp.en_px ?? 14, fontWeight: 700, opacity: 1 }}>
