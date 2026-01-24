@@ -201,10 +201,10 @@
     "th_px": 14,
     "en_px": 14,
     "lines": [
-      { "th": "หากมีข้อโต้แย้งให้รีบแจ้งทางบริษัท ภายใน 7 วัน นับแต่วันรับของ มิฉะนั้นทางร้านจะมิยอมรับในความผิดพลาดใดๆ",
-        "en": "CLAIMS NOT MADE WITHIN 7 DAYS AFTER RECEIPT OF GOODS CANNOT BE ACCEPTED" },
-      { "th": "ได้ตรวจรับมอบสินค้าตามรายการและจำนวนในสภาพที่เรียบร้อย",
-        "en": "GOODS ARE RECEIVED AT THE ABOVE QUANTITY AND IN THE GOOD MANNER" }
+      { "th": "หากมีข้อโต้แย้งใด ๆ กรุณาแจ้งให้บริษัททราบภายในระยะเวลา 7 วัน นับแต่วันที่ได้รับสินค้า มิฉะนั้นบริษัทจะถือว่าลูกค้าได้ตรวจรับสินค้าเรียบร้อยแล้ว และขอสงวนสิทธิ์ไม่รับผิดชอบต่อความผิดพลาดใด ๆ",
+        "en": "Any claims must be submitted within 7 days from the date of receipt of the goods. Claims made after this period will not be accepted." },
+      { "th": "ผู้รับได้ตรวจรับสินค้าตามรายการและจำนวนครบถ้วนแล้ว โดยสินค้าอยู่ในสภาพเรียบร้อยสมบูรณ์",
+        "en": "The goods have been received in the quantities stated above and in good condition." }
 
     ]
   }
