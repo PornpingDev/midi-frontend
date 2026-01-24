@@ -164,7 +164,7 @@ const UserManagement = () => {
     try {
       await axios.put(`/users/${id}/reset-password`);
       setConfirm({ show: false, userId: null });
-      setToast({ show: true, message: '✅ รีเซ็ตรหัสผ่านสำเร็จ (password123)', variant: 'success' });
+      setToast({ show: true, message: '✅ รีเซ็ตรหัสผ่านสำเร็จ (Sripara5105809)', variant: 'success' });
       await fetchUsers();
     } catch (error) {
       console.error('Reset password error:', error);
@@ -231,7 +231,7 @@ const UserManagement = () => {
         onClose={cancelConfirm}
         onConfirm={doConfirmReset}
         title="ยืนยันรีเซ็ตรหัสผ่าน"
-        body="ต้องการรีเซ็ตรหัสผ่านเป็นค่าเริ่มต้น (password123) หรือไม่?"
+        body="ต้องการรีเซ็ตรหัสผ่านเป็นค่าเริ่มต้น (Sripara5105809) หรือไม่?"
         variant="warning"
       />
     </Container>
