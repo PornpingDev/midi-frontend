@@ -128,7 +128,7 @@ const UserTable = ({ users, onEdit, onDelete, onResetPassword }) => {
         <Modal.Body>
           คุณแน่ใจว่าต้องการ Reset รหัสผ่านของพนักงาน: <strong>{userToReset?.name}</strong> ?
           <br />
-          รหัสผ่านใหม่จะถูกตั้งเป็นค่า Default: <strong>password123</strong>
+          รหัสผ่านใหม่จะถูกตั้งเป็นค่า Default: <strong>Sripara5105809</strong>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={() => setShowConfirmReset(false)}>
@@ -146,7 +146,7 @@ const UserTable = ({ users, onEdit, onDelete, onResetPassword }) => {
           <Modal.Title>Reset รหัสผ่านสำเร็จ</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          รหัสผ่านของพนักงาน: <strong>{userToReset?.name}</strong> ถูก Reset เป็น <strong>password123</strong> แล้ว
+          รหัสผ่านของพนักงาน: <strong>{userToReset?.name}</strong> ถูก Reset เป็น <strong>Sripara5105809</strong> แล้ว
         </Modal.Body>
         <Modal.Footer>
           <Button variant="success" onClick={() => setShowSuccess(false)}>
